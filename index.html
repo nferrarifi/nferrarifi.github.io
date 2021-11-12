@@ -240,7 +240,7 @@ console.log (`Falta elegir ${coloresTurnoComputadora.length-coloresTurnoUsuario.
 }
 
 function compararUsuarioComputadora () {
-    if(coloresTurnoUsuario [contadorTurno] == coloresTurnoComputadora [contadorTurno]){
+    if(coloresTurnoUsuario == coloresTurnoComputadora){
     contadorTurno = contadorTurno+1
     setTimeout(function(){turnoComputadora()},1500)}
     else 
