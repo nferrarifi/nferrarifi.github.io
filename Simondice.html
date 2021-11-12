@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Simon Says - Nahuel Ferrari</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<style>
+    
+h1 {
+    font-size: 24px;
+}
+#start-button{
+    border-radius:15px;
+    border-color: black;
+    background-color: salmon;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: all 0.5s;
+    font-size: 18px;
+    border-width: 3px;
+    height:45px;
+}
+
+#start-button:hover{
+    color:black;
+    background-color:pink;
+    border-color:wheat;
+}
+
+#header-div{
+
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    margin-left:50px;
+    margin-right:50px;
+    text-align: center;
+}
+
+
+.boton-simon{
+    transition: all 0.3s;
+}
+
+.cuadrado{
+    float: left;
+    border-color:black;
+    border-width: 2px;
+    width: 350px;
+    height:350px;
+    border-radius: 10px;
+    transition: all 1s;
+    opacity: 0.3;
+    display:flex
+}
+
+#cuadrado-verde{
+    margin-left: 350px;
+    background-color: rgb(145, 223, 28);
+    display:flex
+}
+
+
+#cuadrado-rojo{
+    background-color: rgb(216, 17, 57);
+    display:flex
+
+}
+
+
+#cuadrado-amarillo{
+    margin-left: 350px;
+    background-color: rgb(228, 228, 15);
+    display:flex
+
+}
+
+
+#cuadrado-azul{
+    background-color: rgb(19, 19, 235);
+    display:flex
+
+}
+
+.span-turno-numero{
+    margin-left: 50px;
+}
+
+</style>
+
+
+
+<body>
+    <h1 id="header-text">
+        <div id="header-div">Presiona el boton <strong>comenzar</strong> para empezar a jugar  <button type="button" id="start-button">Comenzar</button></div> 
+        <span class="span-turno-numero">Turno numero: <span id="numero-turno"></span></span>
+    </h1>
+<div class="container">
+    <div class="row">
+     <div id="cuadrado-verde" class="cuadrado"  class="col">Verde</div> <br>
+     <div id="cuadrado-rojo" class="cuadrado" class="col">Rojo</div> <br>
+    </div>
+    <div class="row">
+     <div id="cuadrado-amarillo" class="cuadrado" class="col">Amarillo</div>
+     <div id="cuadrado-azul" class="cuadrado" class="col">Azul</div>
+    </div>
+</div>
+</body>
+
+<script>
+    let Verde = 1
+    let Rojo = 2
+    let Amarillo = 3
+    let Azul = 4
+    let coloresTurnoComputadora
+    let coloresTurnoUsuario
+    let contadorTurno
+    let $cuadradoVerde = document.querySelector("#cuadrado-verde")
+    let $cuadradoRojo = document.querySelector("#cuadrado-rojo")
+    let $cuadradoAmarillo = document.querySelector("#cuadrado-amarillo")
+    let $cuadradoAzul = document.querySelector("#cuadrado-azul")
+
+document.querySelector("#start-button").onclick = function()
+{
+    contadorTurno = 0
+    coloresTurnoComputadora = []
+    turnoComputadora ()
+}
+
+function eleccionColorComputadora (){
+    let valorColorCuadrado = Math.floor(Math.random() * (4 - 1)) + 1 //devuelve un valor al azar entre 1 y 4
+    return valorColorCuadrado
+}
+
+function testIluminacionColores (){
+    let delayPerColor = 1000
+    for (let i = 0; i<coloresTurnoComputadora.length; i++){
+        setTimeout (() => {
+        if (coloresTurnoComputadora[i] == Verde){
+          iluminacionColorVerde ()}
+        else if (coloresTurnoComputadora[i] == Rojo) {
+         iluminacionColorRojo ()}
+        else if (coloresTurnoComputadora[i] == Amarillo) {
+         iluminacionColorAmarillo ()}
+        else if (coloresTurnoComputadora[i] == Azul) {
+            iluminacionColorAzul ()}
+            },1000*(i+1))
+        }
+    }
+
+function iluminacionColorVerde () {
+    $cuadradoVerde.style.opacity = 1
+    setTimeout (function () {$cuadradoVerde.style.opacity = 0.3}, 500)
+}    
+
+function iluminacionColorRojo () {
+    $cuadradoRojo.style.opacity = 1
+    setTimeout (function () {$cuadradoRojo.style.opacity = 0.3}, 500)
+}    
+
+function iluminacionColorAmarillo () {
+    $cuadradoAmarillo.style.opacity = 1
+    setTimeout (function () {$cuadradoAmarillo.style.opacity = 0.3}, 500)
+}    
+
+function iluminacionColorAzul () {
+    $cuadradoAzul.style.opacity = 1
+    setTimeout (function () {$cuadradoAzul.style.opacity = 0.3}, 500)
+}    
+
+function iluminacionColoresComputadora(){
+    let delayPerColor = 1000
+    coloresTurnoComputadora.forEach (function ($color){
+        setTimeout(() => {
+                if ($color == Verde){
+                $cuadradoVerde.style.opacity = 1
+                setTimeout (function () {$cuadradoVerde.style.opacity = 0.3}, delayPerColor)}
+                else if ($color == Rojo) {
+                $cuadradoRojo.style.opacity = 1
+                setTimeout (function () {$cuadradoRojo.style.opacity = 0.3}, delayPerColor);}
+                else if ($color == Amarillo) {
+                $cuadradoAmarillo.style.opacity = 1
+                setTimeout (function () {$cuadradoAmarillo.style.opacity = 0.3}, delayPerColor);}
+                else if ($color == Azul) {
+                $cuadradoAzul.style.opacity = 1
+                setTimeout (function () {$cuadradoAzul.style.opacity = 0.3}, delayPerColor);}
+        },1000)
+})}
+
+function bloquearInputUsuario (){
+document.querySelectorAll(".cuadrado").forEach(function ($cuadrado){
+    $cuadrado.onclick = function (){
+        console.log ("input bloqueado")
+    }})}
+
+function turnoComputadora () {
+    document.querySelector("#numero-turno").innerText = contadorTurno + 1
+    bloquearInputUsuario()
+    coloresTurnoComputadora.push (eleccionColorComputadora())
+    testIluminacionColores()
+    setTimeout(() => { turnoUsuario ()}, 1000*contadorTurno)
+    return false
+}
+
+function turnoUsuario (){
+coloresTurnoUsuario = []
+$cuadradoVerde.onclick = function (){
+    $cuadradoVerde.style.opacity = 1
+    setTimeout (function () {$cuadradoVerde.style.opacity = 0.3}, 500);
+    coloresTurnoUsuario.push (Verde)
+    chequearTotalClicks()
+}
+$cuadradoRojo.onclick = function (){
+    $cuadradoRojo.style.opacity = 1
+    setTimeout (function () {$cuadradoRojo.style.opacity = 0.3}, 500);
+    coloresTurnoUsuario.push (Rojo)
+    chequearTotalClicks()
+}
+$cuadradoAmarillo.onclick = function (){
+    $cuadradoAmarillo.style.opacity = 1
+    setTimeout (function () {$cuadradoAmarillo.style.opacity = 0.3}, 500);
+    coloresTurnoUsuario.push (Amarillo)
+    chequearTotalClicks()
+}
+$cuadradoAzul.onclick = function (){
+    $cuadradoAzul.style.opacity = 1
+    setTimeout (function () {$cuadradoAzul.style.opacity = 0.3}, 500);
+    coloresTurnoUsuario.push (Azul)
+    chequearTotalClicks()
+}
+}
+
+function chequearTotalClicks(){
+if (coloresTurnoUsuario.length == coloresTurnoComputadora.length) {
+    compararUsuarioComputadora ()
+}
+else
+console.log (`Falta elegir ${coloresTurnoComputadora.length-coloresTurnoUsuario.length} color`)
+}
+
+function compararUsuarioComputadora () {
+    if(coloresTurnoUsuario [contadorTurno] == coloresTurnoComputadora [contadorTurno]){
+    contadorTurno = contadorTurno+1
+    setTimeout(function(){turnoComputadora()},1500)}
+    else 
+    alert ("PERDISTE")
+}
+
+</script>
+</html>
