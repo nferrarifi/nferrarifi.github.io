@@ -232,10 +232,11 @@ $cuadradoAzul.onclick = function (){
 }
 
 function chequearTotalClicks(){
-compararUsuarioComputadora ()
-if (coloresTurnoUsuario.length <= coloresTurnoComputadora.length) {
-    console.log (`Falta elegir ${coloresTurnoComputadora.length-coloresTurnoUsuario.length} color`)
+if (coloresTurnoUsuario.length == coloresTurnoComputadora.length) {
+    compararUsuarioComputadora ()
 }
+else
+console.log (`Falta elegir ${coloresTurnoComputadora.length-coloresTurnoUsuario.length} color`)
 }
 
 function compararUsuarioComputadora () {
