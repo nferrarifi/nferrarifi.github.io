@@ -232,7 +232,7 @@ $cuadradoAzul.onclick = function (){
 }
 
 function chequearTotalClicks(){
-if (coloresTurnoUsuario.length == coloresTurnoComputadora.length) {
+if (coloresTurnoUsuario.length === coloresTurnoComputadora.length) {
     compararUsuarioComputadora ()
 }
 else
@@ -240,12 +240,19 @@ console.log (`Falta elegir ${coloresTurnoComputadora.length-coloresTurnoUsuario.
 }
 
 function compararUsuarioComputadora () {
-    if(coloresTurnoUsuario == coloresTurnoComputadora){
-    contadorTurno = contadorTurno+1
-    setTimeout(function(){turnoComputadora()},1500)}
+    for (let i = 0; i<(contadorTurno+1); i++){
+        if (coloresTurnoUsuario[i] === coloresTurnoComputadora[i])
+        console.log ("coincide la eleccion numero " + (i+1))
     else 
     alert ("PERDISTE")
+    }
+ejecutarSiguienteTurno()
 }
+
+function ejecutarSiguienteTurno (){
+    contadorTurno = contadorTurno+1
+    setTimeout(function(){turnoComputadora()},1500)}
+
 
 </script>
 </html>
